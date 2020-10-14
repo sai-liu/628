@@ -24,36 +24,3 @@ election.step.both <- step(lm(y~., data_1), direction='both')
 
 lm_model=lm(y~x1+x2+x3+x7+x12+x13,data_1)
 lm_model$coefficients
-
-library(shiny)
-ui=fluidPage(
-  numericInput(
-    inputId="density",
-    label="Density",
-    value=1),
-  numericInput(
-    inputId="age",
-    label="Age",
-    value=1),
-  numericInput(
-    inputId="weight",
-    label="Weight",
-    value=1),
-  numericInput(
-    inputId="chest",
-    label="Chest",
-    value=1),
-  numericInput(
-    inputId="ankle",
-    label="Ankle",
-    value=1),
-  numericInput(
-    inputId="biceps",
-    label="Biceps",
-    value=1),
-  textOutput("Bodyfat"))
-
-server=function(input,output){
-  output$Bodyfat=renderPrint({a=(423.058-384.997*input$density+0.011*input$age+0.013*input$weight+0.033*input$chest-0.083*input$ankle-0.062*input$biceps);paste("Your Bodyfat is ",a,sep="")})
-}
-shinyApp(ui=ui,server=server)

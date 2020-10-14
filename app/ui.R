@@ -1,0 +1,27 @@
+library(shiny)
+fluidPage(
+  numericInput(
+    inputId="density",
+    label="Density",
+    value=1),
+  numericInput(
+    inputId="age",
+    label="Age",
+    value=1),
+  numericInput(
+    inputId="weight",
+    label="Weight",
+    value=1),
+  numericInput(
+    inputId="chest",
+    label="Chest",
+    value=1),
+  numericInput(
+    inputId="ankle",
+    label="Ankle",
+    value=1),
+  numericInput(
+    inputId="biceps",
+    label="Biceps",
+    value=1),
+  textOutput("Bodyfat"))
