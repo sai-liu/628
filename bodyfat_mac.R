@@ -69,6 +69,7 @@ election.step.backward <- stepAIC(lm(fmla, data_raw), direction='backward',steps
 model3_coefficients=data.frame(vairable=c(names(election.step.backward$coefficients)),coefficients=election.step.backward$coefficients)
 row.names(model3_coefficients)=c()
 write.csv(model3_coefficients,"mode3.csv")
+plot()
 
 #election.step.backward <- step(lm(y~1, data_1),list(upper=~x1+x2+x3+x4+x5+x6+x7+x8+x9+x10+x11+x12+x13+x14+x15), direction='forward', k=2)
 #election.step.backward <- step(lm(y~., data_1), direction='backward')
