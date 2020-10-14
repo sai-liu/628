@@ -1,0 +1,5 @@
+vairable,coefficients
+(Intercept),-13.76657156
+weight,0.343508802
+weight:age,0.000892006
+weight:height,-0.002854057

@@ -1,0 +1,14 @@
+vairable,coefficients
+(Intercept),-334.1194388
+age,-1.089462672
+chest,3.219670226
+wrist,25.32987754
+age:chest,-0.005728547
+age:wrist,0.100439714
+weight:height,-0.02192678
+weight:hip,-0.00604989
+wrist:weight,0.128779736
+height:hip,0.077257881
+wrist:height,-0.257623335
+chest:wrist,-0.155502575
+wrist:hip,-0.221097714
