@@ -1,8 +1,10 @@
 library(leaps)
 library(MASS)
 setwd("/Users/yicenliu/xuexi/628/628/")
-data_raw=read.csv("BodyFat.csv")[,-1]
+data_raw=data[,-1]
 names(data_raw)=tolower(names(data_raw))
+data_raw$weight=data_raw$weight*0.45359237
+data_raw$height=data_raw$height*2.54
 ## model 1
 
 
@@ -15,7 +17,7 @@ lm_election=lm(fmla,data=data_raw)
 
 
 X <- model.matrix(lm_election)[,-1]
-election.leaps <- leaps(X, data_1$y, nbest=1, method='adjr2')
+election.leaps <- leaps(X, data_raw$bodyfat, nbest=1, method='adjr2')
 
 best.model.adjr2 <- election.leaps$which[which.max(election.leaps$adjr2),]
 a=colnames(X)[best.model.adjr2]
@@ -25,10 +27,11 @@ plot(election.leaps$size, election.leaps$adjr2, pch=23, bg='orange', cex=2,
      main="Adjusted R^2 for Each Possible Model in Our Election Data")
 
 fmla_model1=as.formula(paste("bodyfat~",paste(a,collapse = "+"),sep=""))
+
 model1=lm(fmla_model1,data_raw)
 model1_coefficients=data.frame(vairable=c(names(model1$coefficients)),coefficients=model1$coefficients)
 row.names(model1_coefficients)=c()
-write.csv(model1_coefficients,"mode1.csv",header=FALSE)
+write.csv(model1_coefficients,"mode1.csv")
 ## model2
 
 name_model2=(names(data_raw)[-1])[c(2,3,4,7,9,15)]
@@ -41,7 +44,7 @@ lm_election=lm(fmla,data=data_raw)
 
 
 X <- model.matrix(lm_election)[,-1]
-election.leaps <- leaps(X, data_1$y, nbest=1, method='adjr2')
+election.leaps <- leaps(X, data_raw$bodyfat, nbest=1, method='adjr2')
 
 best.model.adjr2 <- election.leaps$which[which.max(election.leaps$adjr2),]
 a=colnames(X)[best.model.adjr2]
@@ -69,7 +72,7 @@ election.step.backward <- stepAIC(lm(fmla, data_raw), direction='backward',steps
 model3_coefficients=data.frame(vairable=c(names(election.step.backward$coefficients)),coefficients=election.step.backward$coefficients)
 row.names(model3_coefficients)=c()
 write.csv(model3_coefficients,"mode3.csv")
-plot()
+plot(election.step.backward$residuals)
 
 #election.step.backward <- step(lm(y~1, data_1),list(upper=~x1+x2+x3+x4+x5+x6+x7+x8+x9+x10+x11+x12+x13+x14+x15), direction='forward', k=2)
 #election.step.backward <- step(lm(y~., data_1), direction='backward')
